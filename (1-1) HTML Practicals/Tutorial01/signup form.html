@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Signup Form</title>
+        <style>
+            body{
+                background-color: #39797d;
+                display:flex;
+                align-items:center;
+	            justify-content:center;
+                padding:60px;
+                }
+            form{
+                background-color: white;
+                justify-content:space-between;
+	            border-radius:10px;
+                font-family: Arial, Helvetica, sans-serif;
+                width: 400px;
+                padding:10px;
+                padding-left:30px;
+                padding-right:20px;
+                padding-bottom:50px;
+            }
+            input,select{
+                width:390px;
+                
+            }
+            label{
+                line-height:30px;
+            }
+            h1{
+                text-align:center;
+            }
+            .submit{
+                background-color: #39728b;
+                width:390px;
+                color:white;
+                padding:15px;
+                border:none;
+                outline:none;
+                border-radius:5px;
+                font-weight:bold;
+                cursor:pointer;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <form>
+            <h1>Signup Form</h1>
+            <label for="fname">Full Name</label><br>
+            <input type="text" name="fname"id="fname" placeholder="Enter your full name"><br>
+            <label for="email">EmailAddress</label><br>
+            <input type="email" name="email"id="email" placeholder="Enter your Email Address"><br>
+            <label for="pass">Password</label><br>
+            <input type="password" name="pass"id="pass" placeholder="Enter your password"><br>
+            <label for="bday">Birthdate</label><br>
+            <input type="date" name="bday"id="bday" ><br>
+            <label for="gen">Gender</label><br>
+            <select name="Gen">
+                <option value="select" selected>Select your gender</option>
+                <option value="f">Female</option>
+                <option value="m">Male</option>
+                <option value="o">Other</option>
+            </select><br><br><br>
+            <input type="submit" name="submit"id="submit" size="50px" class="submit">
+
+        </form>
+    </body>    
+</html>

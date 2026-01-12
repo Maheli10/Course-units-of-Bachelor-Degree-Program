@@ -1,0 +1,130 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(222, 222, 224);
+}
+
+header{
+    display: flex;
+    background-color: rgb(63, 10, 10);
+    padding: 10px 15px;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+}
+
+.logo{
+    height: 50px;
+    width: 50px;
+    border-radius: 2px;
+}
+
+.navbar{
+    gap: 15px;
+    padding: 20px;
+    
+}
+
+a{
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background 0.3s;
+}
+
+a:hover{
+    background-color: rgb(216, 100, 100);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+h1{
+    color: red;
+    text-align: center;
+    padding: 5px 15px; 
+}
+
+.welcome{
+    background-color: rgb(245, 234, 223);
+}
+.vid{
+    padding: 20px;
+    text-align: center;
+    background-color: #a1757557;
+}
+video{
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.delicious{
+    padding: 20px;
+    background-color: #f4eae4;
+    text-align: center;
+}
+
+.chocoim{
+    gap: 15px;
+}
+
+.chocoim img{
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+    gap: 20px;
+    transition: transform 0.5s;
+}
+.chocoim img:hover {
+    transform: scale(1.1);
+}
+
+footer{
+    background-color: rgb(77, 18, 18);
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+/*login Form*/
+form{
+    padding: 20px 30px;
+    border: 1px solid white;
+    border-width: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-top: 200px;
+    margin-left: 500px;
+    margin-right: 500px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+
+}
+
+.text{
+    border-radius: 5px;
+    padding: 10px 80px;
+    text-align: center;
+    font-size: 1rem;
+    box-shadow: 0 0 5px rgba(192, 122, 94, 0.5);
+    outline: none;
+
+}
+
+button{
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(57, 15, 15);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+button:hover{
+    background-color: rgb(205, 167, 136);
+}

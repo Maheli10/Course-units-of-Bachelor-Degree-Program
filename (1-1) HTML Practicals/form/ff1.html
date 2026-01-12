@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Form</title>
+    <style>
+        form
+		{
+		width:80%;
+		height:50%;
+		}
+		legend
+		{
+
+	font-weight:bold;}
+	Button
+	{
+	border:1px solid black;
+	border-radius:10px;
+	}
+    </style>
+</head>
+<body>
+    <form>
+          <fieldset>
+            <legend>Your Details</legend>
+            <ol>
+			<li><label for="name">Name</label>
+            <input type="text" id="name" placeholder="First and last name"></li>
+             
+            <li><label for="email">Email</label>
+            <input type="email" id="email" placeholder="example@domain.com"></li>
+              
+            <li><label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="Eg. +447500000000"></li>
+			 <br>
+			</ol>
+        </fieldset>
+
+        <!-- Delivery Address -->
+        <fieldset>
+            <legend>Delivery Address</legend>
+            <ol><li><label for="address">Address</label>
+            <textarea id="address" rows="3" placeholder="Enter your address"></textarea>
+             </li>
+			  
+            <li><label for="postcode">Post Code</label>
+            <input type="text" id="postcode"></li>
+              
+            <li><label for="country">Country</label>
+            <input type="text" id="country"></li>
+			</ol>
+        </fieldset>
+
+     
+        <fieldset>
+            <legend>Card Details</legend>
+            
+			<ol><li>
+			<fieldset>
+			<legend>Card Type</legend>
+			<ol>
+            <li><input type="radio" name="card-type" value="visa"> VISA</li>
+            <li><input type="radio" name="card-type" value="amex"> AmEx</li>
+            <li><input type="radio" name="card-type" value="mastercard"> Mastercard</li>
+              </li></ol>
+			  </fieldset>
+			 
+            <li><label for="card-number">Card Number</label>
+            <input type="text" id="card-number" ></li>
+             
+            <li><label for="security-code">Security Code</label>
+            <input type="password" id="security-code">
+             </li>
+            <li><label for="card-name">Name on Card</label>
+            <input type="text" id="card-name" placeholder="Exact name as on the card">
+        </li></ol>
+		</fieldset>
+		
+
+        
+		<fieldset>
+        <button type="submit">Buy it!</button>
+		</fieldset>
+    </form>
+</body>
+</html>

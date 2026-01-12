@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Contact Form</title>
+    <style>
+        body {
+            background-image: url('back.jpg');
+			 background-size: cover; 
+            }
+			input{
+			border:1px solid white;}
+		select
+		{
+		width:353px;
+		border:1px solid white;
+		}
+		.textarea
+		{
+		width:350px;
+		height:60px;
+		border:1px solid white;
+		}
+		.td{
+		border:1px solid white;
+		width:350px;
+		height:60px;
+		background-color:white;
+		}
+		h2,label{
+            font-weight:bold;
+            color: white }
+
+        .star::after {
+    content: "*";
+    color: white;
+}
+
+		button
+		{
+		border-radius:8px;
+		background-color:#edebf1;
+		border:1px solid white;
+		color:#2331e9;
+		
+		}
+		
+    </style>
+</head>
+<body>
+        <h2>Contact Form</h2>
+        <form>
+                <table>
+				<tr>
+				<td><label for="first-name">Your Name</label></td>
+                <td><input type="text" id="first-name" name="first-name" placeholder="First Name" >
+                <input type="text" id="last-name" name="last-name" placeholder="Last Name"  ></td></tr>
+            
+                <tr><td><label for="email">Your Email</label></td>
+                <td><input type="email" id="email" name="email" placeholder="e.g. hello@contact.net" size="47"></td>
+           
+
+<tr><td> <label for="phone" class="star">Phone</label></td>
+                <td><input type="tel" id="phone" name="phone" placeholder="###" size="11" required>
+				<input type="tel" id="phone" name="phone" placeholder="###" size="12"  required>
+				<input type="tel" id="phone" name="phone" placeholder="####" size="12" required></td></tr>
+     
+                <tr><td><label for="message-subject" class="star">Message Subject</label></td>
+                <td><select id="message-subject" name="subject" required>
+                    <option value="other"  >Other</option>
+                    <option value="feedback">Feedback</option>
+                    <option value="question">Question</option>
+                </select></td></tr>
+           
+
+            
+                <tr><td><label for="message" class="star">Message</label></td>
+                <td> <input class="textarea" type="text" name="message"  required></td></tr>
+            
+
+            
+                <tr><td><label for="verification" class="star">Verification</label></td>
+                <td class="td"><input type="checkbox" id="verification" name="verification" required>I'am not robot</td></tr>
+               </table>
+			     
+			   <hr>
+                <button type="submit">Submit Form</button>
+           </form>
+</body>
+</html>

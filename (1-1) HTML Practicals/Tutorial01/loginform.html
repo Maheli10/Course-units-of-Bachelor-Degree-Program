@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login form</title>
+        <style>
+            body{
+                background: linear-gradient(90deg, rgba(161,207,255,1) 33%, rgba(198,173,240,1) 63%);
+                align-items:center;
+	            padding:10px;
+                justify-content:center;
+                display:flex;
+            }
+            form{
+                background-color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	            width: 300px;
+                justify-content:space-between;
+                padding:80px;
+                padding-top:10px;
+                border-radius:10px;
+            }
+            a{	
+                text-decoration:none;
+	            color:blue;
+            }
+            h1{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                padding-left:60px;
+            }
+            button{
+                    border-radius:5px;
+                    border:none;
+                    outline:none;
+                    cursor:pointer;
+                    transition:03.s;
+                    font-weight:bold;
+                    padding:10px 10px;
+            }
+            .loginbt{
+                    background: linear-gradient(90deg, rgb(28, 34, 102) 23%, rgb(105, 125, 177) 83%);
+                    color:white;
+                    width:145px;
+                    }
+             .login{
+                    background: linear-gradient(90deg, rgb(28, 23, 99) 23%, rgb(39, 77, 118) 83%);
+                    color:white;
+	                width:320px;
+                    }
+            .signupbt{
+                width:145px;
+            }
+            input{
+                display: block;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                outline: none;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <form>
+            <h1>Login Form</h1>
+        <button class=loginbt value="Login">Login</button>
+        <button class=signupbt value="signup">Signup</button><br><br>
+        <input type="email"  name="email"id="email" placeholder="Email Address" size="40px"><br><br>
+        <input type="password"  name="pass" id="pass" placeholder="Password" size="40px"><br><br>
+        <a href="#">Forgot password?</a><br><br>
+        <input type="submit" class="login" name="sumit" value="Login" ><br>
+        <br>
+        <label>Create an account</label>
+        <a href="#">Signup now</a>
+        </form>
+    </body>
+</html>

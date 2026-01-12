@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+       table
+	   {
+	   margin:auto;
+	   }
+        .required::before {
+            content: "* ";
+            color: red;
+        }
+		textarea
+		{width: 300px;
+            height: 100px;
+            overflow-y: scroll;
+		}
+    </style>
+</head>
+<body>
+<table>
+    <form>
+       <tr>
+		<td><label class="required" for="company">Company:</label></td>
+        <td><input type="text" id="company" name="company" required></td></tr>
+
+   
+        <tr><td><label class="required" for="first-name">First Name:</label></td>
+        <td><input type="text" id="first-name" name="first-name" required></td></tr>
+
+      
+         <tr><td><label class="required" for="last-name">Last Name:</label></td>
+        <td><input type="text" id="last-name" name="last-name" required></td></tr>
+
+       
+         <tr><td><label class="required" for="email">Email Address:</label></td>
+        <td><input type="email" id="email" name="email" required></td></tr>
+
+       
+         <tr><td><label class="required" for="title">Title:</label></td>
+        <td><input type="text" id="title" name="title"></td></tr>
+
+        
+        <tr><td><label class="required" for="phone">Phone:</label></td>
+        <td><input type="tel" id="phone" name="phone" required></td></tr>
+
+        
+        <tr><td><label for="cancel">Cancel Registration:</label></td>
+        <td><input type="checkbox" id="cancel" name="cancel" checked></td></tr>
+
+        <tr><td><label class="required" for="training-session">252 Training Session 2010:</label></td>
+        <td><select id="training-session" name="training-session" required>
+            <option value="" disabled selected>--Select a date--</option>
+            <option value="date1">Date 1</option>
+            <option value="date2">Date 2</option>
+            <option value="date3">Date 3</option>
+        </select></td></tr>
+
+       
+        <tr><td><label class="required">Job Function:</label></td>
+        <td><input type="radio" name="job" value="campaign-management" required> Campaign Management</td></tr>
+		   <tr><td></td>
+       <td><input type="radio" name="job" value="crm" required> CRM Administration</td></tr>
+	   <tr><td></td>
+       <td><input type="radio" name="job" value="email" required> Email Deployment</td></tr>
+	   <tr><td></td>
+       <td><input type="radio" name="job" value="partner" required> Partner</td></tr>
+	   <tr><td></td>
+       <td><input type="radio" name="job" value="employee" required> Employee</td></tr>
+
+        <tr><td><label for="dietary">Dietary Requirements:</label></td>
+       <td><input type="text" id="dietary" name="dietary"></td>
+	   </tr>
+
+      
+        <tr><td><label for="expectations">Expectations?</label></td>
+        <td><textarea id="expectations" name="expectations" ></textarea></td></td>
+
+        <tr><td></td>
+        <td><button type="submit">Submit</button></td></tr>
+    </form>
+	</table>
+</body>
+</html>
