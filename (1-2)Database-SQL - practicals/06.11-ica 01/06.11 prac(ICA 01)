@@ -1,0 +1,8 @@
+line 1
+MariaDB [(none)]>  create database it1223_ica_01_2;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> use  it1223_ica_01_2;
+Database changed
+
+create table stuents();
