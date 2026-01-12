@@ -1,0 +1,72 @@
+Course units Learned :
+
+	Year 01
+		Semester 01 (Academic Year 2022/23)
+			IT1113(P) Fundamentals of Information Technology(Practical)
+			IT1113(T) Fundamentals of Information Technology(Theory)
+			IT1122 Foundation of Mathematics
+			IT1134(P) Fundamentals of Programming(Practical)
+			IT1134(T) Fundamentals of Programming(Theory)
+			IT1144(P) Fundamentals of Web Programming(Practical)
+			IT1144(T) Fundamentals of Web Programming(Theory)
+			IT1152 Essentials of Statistics
+			ACU1113 IT English Language I
+			
+		Semester 02 (Academic Year 2022/23)
+			IT1214(P) Object Oriented Design and Programming (Practical)
+			IT1214(T) Object Oriented Design and Programming (Theory)
+			IT1223(P) Database Management Systems (Practical)
+			IT1223(T) Database Management Systems (Theory)
+			IT1232 Project Management
+			IT1242 Principles of Computer Networks
+			IT1252(P) Electronics and Device Interfacing (Practical)
+			IT1252(T) Electronics and Device Interfacing (Theory)
+			IT1262 Mathematics for Computing
+			ACU1212 IT Social Harmony and Active Citizenship
+			
+			
+	Year 02 
+		Semester 01(Academic Year 2023/24)
+			IT2114(P) Data Structures(Practical)
+			IT2114(T) Data Structures(Theory)
+			IT2122 Software Engineering
+			IT2133(P) Advanced Web Programming(Practical)
+			IT2133(T) Advanced Web Programming(Theory)
+			IT2143(P) Visual Programming(Practical)
+			IT2143(T) Visual Programming(Theory)
+			IT2153(P) Computer Graphics(Practical)
+			IT2153(T) Computer Graphics(Theory)
+			ACU2113 English Language II
+			
+		Semester 02(Academic Year 2023/24)
+			IT2212 Management Information Systems 
+			IT2223(P) Design and Analysis of Algorithms(Practical) 
+			IT2223(T) Design and Analysis of Algorithms(Theory) 
+			IT2234(P) Web Services and Server Technologies(Practical)
+			IT2234(T) Web Services and Server Technologies(Theory)
+			IT2244(P) Operating Systems(Practical)
+			IT2244(T) Operating Systems(Theory)
+			IT2252 Social and Professional Issues in IT 
+			ACU2212 Communication and Soft Skills
+	
+Year 03 
+		Semester 01(Academic Year 2024/25)
+			IT3113 Knowledge Based Systems and Logic Programming
+			IT3122 Computer Security 
+			IT3133 Mobile Communication and Computing
+			IT3143 Digital Image Processing 
+			IT3152 Software Quality Assurance 
+			IT3162 Group Project 
+			ACU3112 Career Guidance
+			
+		Semester 02(Academic Year 2024/25)
+			IT3213 Human Computer Interaction
+			IT3223 Advanced Database Management Systems
+			IT3232 E-Commerce
+			IT3243 Parallel Computing
+			IT3252 Multimedia Computing
+			IT3262 Operations Research
+			ACU3212 Management and Entrepreneurial Skills
+			ACU3222 Research Methodology and Scientific Writing
+
+						
