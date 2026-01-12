@@ -1,0 +1,121 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Scalingtranslation extends JFrame implements MouseListener {
+
+    Graphics g;
+    int x1,y1;
+   Scalingtranslation() {
+        setTitle("Translation - Computer Graphics");
+        setSize(800, 800);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        addMouseListener(this);
+        g = getGraphics();
+    }
+    public void DDA(int x1, int y1, int x2, int y2) {
+
+        int dx = x2 - x1;
+        int dy = y2 - y1;
+
+        int steps = Math.max(Math.abs(dx), Math.abs(dy));
+
+        double xinc = dx * 1.0 / steps;
+        double yinc = dy * 1.0 / steps;
+
+        double x = x1;
+        double y = y1;
+
+        for (int i = 0; i <= steps; i++) {
+            g.drawLine((int) Math.round(x), (int) Math.round(y),
+                       (int) Math.round(x), (int) Math.round(y));
+            x += xinc;
+            y += yinc;
+        }
+    }
+
+    void drawObject(double[][] p) {
+        DDA((int)p[0][0], (int)p[1][0], (int)p[0][1], (int)p[1][1]);
+        DDA((int)p[0][1], (int)p[1][1], (int)p[0][2], (int)p[1][2]);
+        DDA((int)p[0][2], (int)p[1][2], (int)p[0][0], (int)p[1][0]);
+    }
+    double[][] multiply(double[][] A, double[][] B) {
+        double[][] R = new double[A.length][B[0].length];
+
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < B[0].length; j++) {
+                for (int k = 0; k < A[0].length; k++) {
+                    R[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+
+        return R;
+    }
+	
+	double[][] translationMatrix(double tx, double ty) {
+        return new double[][] {
+                {1, 0, tx},
+                {0, 1, ty},
+                {0, 0, 1}
+        };
+    }
+	void translate(double[][] P){
+        double[][] T = translationMatrix(100, 100);
+        double[][] P2 = multiply(T, P);;
+		 g.setColor(Color.RED);
+        drawObject(P2);
+    }
+	
+    double[][] scalingMatrix(double sx, double sy) {
+        return new double[][] {
+                {sx, 0, 0},
+                {0, sy, 0},
+                {0, 0, 1}
+        };
+    }
+	void scale(double[][] P){
+        double[][] t1 = new double[3][3];
+        double[][] s = new double[3][3];
+        double[][] t2 = new double[3][3];
+        double[][] tfinal = new double[3][3];
+
+        t1 = translationMatrix(-x1, -y1);
+        s = scalingMatrix(1.5,1.5);
+        t2 = translationMatrix(x1, y1);
+
+        tfinal = multiply(s,t1);
+        tfinal = multiply(t2, tfinal);
+
+        P = multiply(tfinal, P);
+		 g.setColor(Color.RED);
+        drawObject(P);
+    }
+    void drawShape() {
+        double[][] P = {
+                {x1, x1+50, x1-50}, 
+                {y1, y1+100, y1+100}, 
+                {1,   1,   1}
+        };
+        g.setColor(Color.BLUE);
+        drawObject(P);
+
+         scale(P);
+    }
+    public void mouseClicked(MouseEvent e) {
+		x1=e.getX();
+		y1=e.getY();
+        drawShape();
+    }
+
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+
+    public static void main(String[] args) {
+        new Scalingtranslation();
+    }
+}
