@@ -1,0 +1,77 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<title>Seat booking</title>
+<style>
+	div{
+		margin :auto;
+		justify-content:center;
+		width:400px;
+	}
+	table{
+	
+	}
+	td{
+		padding:20px;
+	}
+	button{
+		padding:20px;
+		background-color:grey;
+		border-radius:4px;
+		cursor:pointer;
+		border:none;
+	}
+	h2,h3{text-align:center;}
+	<!--button:active{background-color:green;}-->
+	
+</style>
+</head>
+<body>
+	<div>
+	<br>
+		<h2>Mini Bus Seat Booking</h2>
+	<br>
+		<table >
+			<tr>
+				<td><button id ="btn" onclick = "toggles()">1</button></td>
+				<td><button id ="btn" onclick = "toggles()">2</button></td>
+				<td></td>
+				<td><button id ="btn" onclick = "toggles()">3</button></td>
+				<td><button id ="btn" onclick = "toggles()">4</button></td>
+				<td><button id ="btn" onclick = "toggles()">5</button></td>
+			</tr>
+			<tr>
+				<td><button id ="btn" onclick = "toggles(value)">6</button></td>
+				<td><button id ="btn" onclick = "toggles(value)">7</button></td>
+				<td></td>
+				<td><button id ="btn" onclick = "toggles(value)">8</button></td>
+				<td><button id ="btn" onclick = "toggles(value)">9</button></td>
+				<td><button id ="btn" onclick = "toggles(value)">10</button></td>
+			</tr>
+			<tr>
+				<td><button id ="btn" onclick = "toggles(value)">11</button></td>
+				<td><button id ="btn" onclick = "toggles(value)">12</button></td>
+				<td></td>
+				<td><button id ="btn" onclick = "toggles(value)">13</button></td>
+				<td><button id ="btn" onclick = "toggles(value)">14</button></td>
+				<td><button id ="btn" onclick = "toggles(value)">15</button></td>
+			</tr>
+		</table>
+	<br>
+		<h3 id="no"></h3>
+	</div>
+	<script>
+		function toggles()
+		{
+			document.body.style.backgrounColor="green";
+		}
+		button.addEventListener('click',toggles());
+		/*function countseats()
+		{
+			const count = $('button').length;
+			
+			$('#no').text(`Selected seats: ${count}`);
+		}*/
+	</script>
+</body>
+</html>

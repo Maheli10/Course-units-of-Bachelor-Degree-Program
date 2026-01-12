@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>ICA ppr</title>
+<style>
+.con{
+	background-color:rgb(0,0,100);
+	padding:80px;
+	border-radius:5px;
+	justify-content:center;
+	margin:auto;
+	display:flex;
+	width:400px;
+	
+}
+
+button{
+	margin-left:20px;
+	border-radius:4px;
+	background-color:rgb(0,0,0);
+	color:white;
+}
+input{
+	border-radius:4px;
+}
+</style>
+</head>
+<body>
+	<br><br>
+	<div class="con">
+		<input type= "text" id="digit" placeholder="Enter a 3-digit number"> 
+		<button onclick= "func()" >Check</button>
+	</div>
+	
+	<script>
+		function func()
+		{
+			let num= document.getElementById("digit");
+			no=Number(num.value);
+			if(num.value.length==3)
+			{
+				let d1=parseInt(no/100);
+				let temp=parseInt(no/10);
+				let d2=parseInt(temp%10);
+				let d3=parseInt(no%10);
+				
+				if(no== d1**3+d2**3+d3**3)
+				{
+					alert("The number is an armstrong number");
+				}
+				else{
+					alert("The number is not an armstrong number");
+					}
+			}
+			else
+			{
+				alert("Input is invalid !");
+			}
+		}	
+	</script>
+</body>
+</html>
