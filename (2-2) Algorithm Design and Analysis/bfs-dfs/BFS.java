@@ -1,0 +1,249 @@
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class MyLinkedList {
+    Node head;
+
+// add new nodes8
+    void add(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+// check to find the last node
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        temp.next = newNode;
+    }
+
+// just print the elements in the linked list 
+    void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+}
+
+class Graph {
+	// add graph vertices 
+    int V;
+    MyLinkedList[] adj; // define an array with type of linked list and name of "adj"
+
+    Graph(int V) {
+        this.V = V;
+        adj = new MyLinkedList[V];
+		// adj = [null, null, null, ...] for size of v
+
+        for (int i = 0; i < V; i++) {
+            adj[i] = new MyLinkedList();
+        }
+		// it will create array of linked lists like
+		// adj[0], adj[1], adj[2], adj[3], ..........
+    }
+
+    void addEdge(int src, int dest) {
+        adj[src].add(dest);
+    }
+
+// when node 0 and adjacent are 1,2
+// ==> adj[0].add(1)
+// ==> adj[0].add(2)
+
+    void displayGraph() {
+        for (int i = 0; i < V; i++) {
+            System.out.print(i + " -> ");
+            adj[i].display();
+        }
+    }
+	
+	
+	
+	
+	///////////////////////////////////////////////
+	void BFS(int start) {
+        boolean[] visited = new boolean[V];
+
+        QueueCustom queue = new QueueCustom();
+
+        visited[start] = true;
+        queue.enqueue(start);
+
+        System.out.print("BFS Traversal: ");
+
+        while (!queue.isEmpty()) {
+            int node = queue.dequeue();
+            System.out.print(node + " ");
+
+			// when node is 1, and takes the adjacency list of that node
+			// from the array of linked list
+			// and get to start from the head node of that linked list
+            Node temp = adj[node].head;
+
+            while (temp != null) {
+                if (!visited[temp.data]) {
+                    visited[temp.data] = true;
+                    queue.enqueue(temp.data);
+                }
+                temp = temp.next;
+            }
+        }
+        System.out.println();
+    }
+    
+/*
+    void DFS_Stack(int start) {
+    boolean[] visited = new boolean[V];
+
+    StackCustom stack = new StackCustom();
+
+    stack.push(start);
+
+    System.out.print("DFS (Stack) Traversal: ");
+
+    while (!stack.isEmpty()) {
+        int node = stack.pop();
+
+        if (!visited[node]) {
+            visited[node] = true;
+            System.out.print(node + " ");
+        }
+
+        // go through adjacency list
+        Node temp = adj[node].head;
+
+        while (temp != null) {
+            if (!visited[temp.data]) {
+                stack.push(temp.data);
+            }
+            temp = temp.next;
+        }
+    }
+    System.out.println();
+}
+*/
+	
+	/////////////////////////////////////////////////
+}
+
+/*
+class StackCustom {
+    Node top;
+
+    void push(int data) {
+        Node newNode = new Node(data);
+        newNode.next = top;
+        top = newNode;
+    }
+
+    int pop() {
+        if (top == null)
+            return -1;
+
+        int value = top.data;
+        top = top.next;
+        return value;
+    }
+
+    boolean isEmpty() {
+        return top == null;
+    }
+}
+*/
+
+// Queue using Linked List
+class QueueCustom {
+    Node front, rear;
+
+    void enqueue(int data) {
+        Node newNode = new Node(data);
+
+        if (rear == null) {
+            front = rear = newNode;
+            return;
+        }
+
+        rear.next = newNode;
+        rear = newNode;
+    }
+
+    int dequeue() {
+        if (front == null)
+            return -1;
+
+        int value = front.data;
+        front = front.next;
+
+        if (front == null)
+            rear = null;
+
+        return value;
+    }
+
+    boolean isEmpty() {
+        return front == null;
+    }
+}
+
+
+public class BFS {
+    public static void main(String[] args) {
+
+        Graph g = new Graph(5);
+
+        g.addEdge(0, 1);
+        g.addEdge(0, 2);
+        g.addEdge(1, 3);
+        g.addEdge(1, 4);
+
+        g.displayGraph();
+		
+		g.FBS(0);
+		//g.DFS(0);
+		
+		/* boolean[] visited = new boolean[g.V];
+        QueueCustom queue = new QueueCustom();
+
+        int start = 0;
+
+        visited[start] = true;
+        queue.enqueue(start);
+
+        System.out.print("BFS Traversal: ");
+
+        while (!queue.isEmpty()) {
+            int node = queue.dequeue();
+            System.out.print(node + " ");
+
+            Node temp = g.adj[node].head;
+
+            while (temp != null) {
+                if (!visited[temp.data]) {
+                    visited[temp.data] = true;
+                    queue.enqueue(temp.data);
+                }
+                temp = temp.next;
+            }
+		} */
+    }
+}
+
+
+
+//======================================
+
+
