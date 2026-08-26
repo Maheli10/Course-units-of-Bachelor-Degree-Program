@@ -1,0 +1,8 @@
+setTimeout(
+    ()=>
+    {
+        console.log("Callback as an arrow function");
+    },1000
+);
+
+setTimeout(function, time)
