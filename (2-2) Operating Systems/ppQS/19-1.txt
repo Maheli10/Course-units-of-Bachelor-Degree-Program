@@ -1,0 +1,42 @@
+echo "enter n"
+read n
+echo "enter r"
+read r
+
+if [ n -lt r ];
+then
+        echo "n is less than r."
+        echo "Re-enter n:"
+        read n
+        echo "Re-enter r:"
+        read r
+fi
+
+factorial(){
+        fact=1
+        for ((i=1; i<=num; i++))
+        do
+                fact=$((fact*i))
+        done
+        echo $fact
+}
+
+
+combination(){
+	
+	
+	num=$n
+	nf=$(factorial)
+	
+	num=$(($n-$r))
+	nr=$(factorial)
+	
+	num=$r
+	rf=$(factorial) 
+	
+	ncr=$((nf/(nr*rf)))
+	
+	echo $ncr
+}
+
+combination 

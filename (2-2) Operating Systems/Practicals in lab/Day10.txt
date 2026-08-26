@@ -1,0 +1,154 @@
+code 01:-----(A)
+              ^
+			 B C
+			 ^ ^
+			DE FG
+			
+	#include<unistd.h>
+	#include<stdio.h>
+	int main(){
+	printf("A (PID: %d) \n",getpid());
+	if(fork() == 0){
+	printf("B(PID: %d, PPID: %d)\n",getpid(),getppid());
+	if(fork()==0){
+	printf("D(PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	else if(fork()==0){
+	printf("E(PID: %d, PPID: %d) \n",getpid(),getppid());
+	}
+	}
+	else if(fork()==0){
+	printf("C(PID: %d, PPID: %d)\n", getpid(),getppid());
+	if(fork()==0){
+	printf("F(PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	else if(fork()==0){
+	printf("G(PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	}
+	return 0;
+	}
+
+output: 
+	A (PID: 16917)
+	B(PID: 16918, PPID: 16917)
+	C(PID: 16919, PPID: 16917)
+	D(PID: 16920, PPID: 16918)
+	E(PID: 16921, PPID: 16918)
+	F(PID: 16922, PPID: 16919)
+	G(PID: 16923, PPID: 16919)
+
+code(02): (A)
+		   ^
+		  B C
+		  | |
+		  D E
+
+	#include<stdio.h>
+	#include<unistd.h>
+	int main(){
+	printf("A(PID: %d,PPID %d)\n",getpid(),getppid());
+	if(fork()==0){
+	printf("B(PID: %d, PPID: %d)\n",getpid(),getppid());
+	if(fork()==0){
+	printf("D(PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	}
+	else if(fork()==0){
+	printf("C(PID: %d, PPID: %d)\n",getpid(),getppid());
+	if(fork()==0){
+	printf("E(PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	}
+	return 0;
+	}
+
+Output: 
+	A(PID: 19576,PPID 2047)
+	B(PID: 19577, PPID: 19576)
+	C(PID: 19578, PPID: 19576)
+	D(PID: 19579, PPID: 19577)
+	E(PID: 19580, PPID: 19578)
+
+03.code:(parent process:get a user input to find out factorial, 
+		and in its child process: find factorial)
+	#include<stdio.h>
+	#include<unistd.h>
+	int main(){
+	int a;
+	int fact=1;
+	printf("Enter number: ");
+	scanf("%d" ,&a);
+	printf("Process id %d\n",getpid());
+	if(fork()==0){
+	for(int i=1; i<=a; i++){
+	fact= fact*i;
+	}
+	printf("Factorial of %d is %d\n",a,fact);
+	printf("(PID: %d,PPID: %d)\n",getpid(),getppid());
+	}
+	return 0;
+	}
+
+output: 
+	Enter number: 5
+	Process id 21756
+	Factorial of 5 is 120
+	(PID: 21762,PPID: 21756)
+
+code: -------------------------Factorial and fibbonacchi--------------------------
+
+#include<stdio.h>
+#include<unistd.h>
+int main(){
+		int child1,child2;
+		int n,i,j,k;
+		printf("Enter a number: ");
+		scanf("%d",&n);
+		child=fork();
+		
+		if(child1 ==0){
+			int fact=1;
+			for(i=1; i<=n; i++){
+				fact = fact*i;
+			}
+			
+			printf("The factorial of %d is %d\n",n,fact);
+			int child5=fork();
+			if(child5==0){
+				int a=0,b=1,c=0;
+				for(j=0;j<n; j++){
+					a=b+c;
+					b=c;
+					c=a;
+				}
+				printf("Fibanocci is %d\n",a);
+				
+			}
+		}
+		else{
+			child2=fork();
+			if(child2==0){
+				int s=1;
+				if(n == 0){
+					s=1;
+				}
+				else{
+					for(k=0;k<n; k++){
+						s *= 2;
+					}
+				}
+				printf("2 is the power is  %d\n",s);
+			}
+			int child3 = fork();
+			if(child3 == 0)
+			int r=n*n;
+			printf("square of %d is %d\n",n,r);
+		
+		}
+	}
+	
+	return 0;
+
+}
+

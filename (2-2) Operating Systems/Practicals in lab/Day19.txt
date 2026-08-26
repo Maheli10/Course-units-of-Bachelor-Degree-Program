@@ -1,0 +1,245 @@
+Display a C program to perform the following tasks using 
+one parent,child, grandchild processes and one unnamed pipe.
+
+a) Read the number of integers N from  user in the parent process.
+read and sends N number of ingredients to the to its child process
+ using pipe A
+b) The child process reads the N number of integer values from pipe A,
+ calculate the sum and sends it along with the number of integers to
+ its child processes(the grandchild process) using pipe B
+c) the grandchild process reads the sum value from pipe B
+ calculates the average and send it back to its grandparent (parent) process
+ through pipe C.
+d) the parent process read the value from the grandchild using pipe C 
+and print the calculated average value 
+e) Each process should print the log messages of their activities
+ indicating their process ID, Parent Process ID, activity, and
+ value(if any)
+
+You are required to use proper error handling mechanisms
+ and process synchronization techniques.
+
+#include<studio.h>
+#include<unistd.h>
+#include<stdlib.j>
+
+int main() {
+    int N;
+    printf("Enter number of integers: ");
+    scanf("%d", &N);
+
+    int arr[N];
+    printf("Enter %d integers: ", N);
+    for (int i = 0; i < N; i++) scanf("%d", &arr[i]);
+
+    int pipeA[2], pipeB[2], pipeC[2];
+    pipe(pipeA);
+    pipe(pipeB);
+    pipe(pipeC);
+
+    pid_t child = fork();
+    if (child == 0) {
+        // Child process
+        close(pipeA[1]); // close write end of pipeA
+        int nums[N];
+        read(pipeA[0], nums, sizeof(nums));
+        close(pipeA[0]);
+
+        int sum = 0;
+        for (int i = 0; i < N; i++) sum += nums[i];
+        printf("Child (PID=%d, PPID=%d): Sum = %d\n", getpid(), getppid(), sum);
+
+        pid_t grandchild = fork();
+        if (grandchild == 0) {
+            // Grandchild process
+            close(pipeB[1]);
+            int data[2];
+            read(pipeB[0], data, sizeof(data));
+            close(pipeB[0]);
+
+            int sumGC = data[0];
+            int NGC = data[1];
+            double avg = (double)sumGC / NGC;
+            printf("Grandchild (PID=%d, PPID=%d): Average = %.2f\n", getpid(), getppid(), avg);
+
+            close(pipeC[0]);
+            write(pipeC[1], &avg, sizeof(avg));
+            close(pipeC[1]);
+            exit(0);
+        } else {
+            // Child sends sum and N to grandchild
+            close(pipeB[0]);
+            int data[2] = {sum, N};
+            write(pipeB[1], data, sizeof(data));
+            close
+			}
+		}
+	return 0;
+}
+	
+
+
+
+
+	#include 
+#include 
+#include 
+#include 
+#include 
+#include 
+
+// Function to handle errors
+void handle_error(const char *msg) {
+    perror(msg);
+    exit(EXIT_FAILURE);
+}
+
+int main() {
+    int pipeA[2]; // Parent -> Child
+    int pipeB[2]; // Child -> Grandchild
+    int pipeC[2]; // Grandchild -> Parent
+
+    // Create pipes
+    if (pipe(pipeA) == -1) handle_error("pipeA creation failed");
+    if (pipe(pipeB) == -1) handle_error("pipeB creation failed");
+    if (pipe(pipeC) == -1) handle_error("pipeC creation failed");
+
+    pid_t pid_child, pid_grandchild;
+
+    // Fork to create child process
+    pid_child = fork();
+    if (pid_child < 0) handle_error("fork for child failed");
+
+    if (pid_child == 0) {
+        // Child process
+        printf("[Child] PID: %d, PPID: %d - Started\n", getpid(), getppid());
+        // Close unused pipe ends
+        close(pipeA[1]); // Parent writes to pipeA
+        close(pipeB[0]); // Grandchild reads from pipeB
+        close(pipeC[1]); // Grandchild writes to pipeC
+
+        int N, i, num, sum = 0;
+        // Read N from parent via pipeA
+        if (read(pipeA[0], &N, sizeof(N)) != sizeof(N))
+            handle_error("[Child] Error reading N");
+        printf("[Child] PID: %d, PPID: %d - Received N=%d\n", getpid(), getppid(), N);
+
+        int *numbers = (int*)malloc(N * sizeof(int));
+        if (numbers == NULL) handle_error("[Child] Memory allocation failed");
+
+        // Read N integers from parent
+        for (i = 0; i < N; i++) {
+            if (read(pipeA[0], &numbers[i], sizeof(int)) != sizeof(int))
+                handle_error("[Child] Error reading number");
+        }
+        printf("[Child] PID: %d, PPID: %d - Received %d integers\n", getpid(), getppid(), N);
+
+        // Calculate sum
+        for (i = 0; i < N; i++) {
+            sum += numbers[i];
+        }
+        printf("[Child] PID: %d, PPID: %d - Calculated sum: %d\n", getpid(), getppid(), sum);
+
+        // Send N and sum to grandchild via pipeB
+        if (write(pipeB[1], &N, sizeof(N)) != sizeof(N))
+            handle_error("[Child] Error writing N to grandchild");
+        if (write(pipeB[1], &sum, sizeof(sum)) != sizeof(sum))
+            handle_error("[Child] Error writing sum to grandchild");
+
+        // Cleanup
+        free(numbers);
+        close(pipeA[0]);
+        close(pipeB[1]);
+        close(pipeC[0]);
+        exit(EXIT_SUCCESS);
+    }
+
+    // Fork to create grandchild process
+    pid_grandchild = fork();
+    if (pid_grandchild < 0) handle_error("fork for grandchild failed");
+
+    if (pid_grandchild == 0) {
+        // Grandchild process
+        printf("[Grandchild] PID: %d, PPID: %d - Started\n", getpid(), getppid());
+        // Close unused pipe ends
+        close(pipeA[0]); // Parent writes to pipeA
+        close(pipeA[1]);
+        close(pipeB[1]); // Child writes to pipeB
+        close(pipeC[0]); // Parent reads from pipeC
+
+        int N, sum;
+        // Read N and sum from child via pipeB
+        if (read(pipeB[0], &N, sizeof(N)) != sizeof(N))
+            handle_error("[Grandchild] Error reading N");
+        if (read(pipeB[0], &sum, sizeof(sum)) != sizeof(sum))
+            handle_error("[Grandchild] Error reading sum");
+        printf("[Grandchild] PID: %d, PPID: %d - Received N=%d and sum=%d\n", getpid(), getppid(), N, sum);
+
+        // Calculate average
+        double average = (double)sum / N;
+        printf("[Grandchild] PID: %d, PPID: %d - Calculated average: %.2f\n", getpid(), getppid(), average);
+
+        // Send average back to parent via pipeC
+        if (write(pipeC[1], &average, sizeof(average)) != sizeof(average))
+            handle_error("[Grandchild] Error writing average to parent");
+
+        // Cleanup
+        close(pipeB[0]);
+        close(pipeC[1]);
+        exit(EXIT_SUCCESS);
+    }
+
+    // Parent process
+    printf("[Parent] PID: %d, PPID: %d - Started\n", getpid(), getppid());
+
+    // Close unused pipe ends
+    close(pipeA[0]); // Parent writes to pipeA
+    close(pipeB[0]); // Child reads from pipeB
+    close(pipeB[1]);
+    close(pipeC[1]); // Grandchild writes to pipeC
+    close(pipeC[0]);
+
+    int N;
+    printf("Enter the number of integers (N): ");
+    if (scanf("%d", &N) != 1) handle_error("Invalid input for N");
+
+    // Send N to child via pipeA
+    if (write(pipeA[1], &N, sizeof(N)) != sizeof(N))
+        handle_error("Error writing N to child");
+
+    int *numbers = (int*)malloc(N * sizeof(int));
+    if (numbers == NULL) handle_error("Memory allocation failed in parent");
+
+    // Read N integers from user
+    printf("Enter %d integers:\n", N);
+    for (int i = 0; i < N; i++) {
+        if (scanf("%d", &numbers[i]) != 1)
+            handle_error("Invalid input for integer");
+    }
+
+    // Send integers to child via pipeA
+    for (int i = 0; i < N; i++) {
+        if (write(pipeA[1], &numbers[i], sizeof(int)) != sizeof(int))
+            handle_error("Error writing number to child");
+    }
+    printf("[Parent] PID: %d, PPID: %d - Sent data to child\n", getpid(), getppid());
+
+    // Wait for grandchild to finish
+    wait(NULL);
+    wait(NULL);
+
+    // Read average from grandchild via pipeC
+    double avg;
+    if (read(pipeC[0], &avg, sizeof(avg)) != sizeof(avg))
+        handle_error("Error reading average from grandchild");
+    printf("[Parent] PID: %d, PPID: %d - Received average: %.2f\n", getpid(), getppid(), avg);
+
+    // Cleanup
+    free(numbers);
+    close(pipeA[1]);
+    close(pipeC[0]);
+
+    printf("[Parent] PID: %d, PPID: %d - Exiting\n", getpid(), getppid());
+    return 0;
+}
+

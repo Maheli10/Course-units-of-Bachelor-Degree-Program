@@ -1,0 +1,79 @@
+01) code: --------Returns process id(pid)-----------
+	#include <stdio.h>
+	#include<unistd.h>
+	int main(){
+	int p=getpid();
+	printf("\nProcess id %d\n",p);
+	return 0;
+	}
+
+output: 
+	[2022ict23@fedora ~]$ gcc a.c -o a
+	[2022ict23@fedora ~]$ ./a
+
+			Process id 34549
+
+02) code: 
+	#include<stdio.h>
+	#include<unistd.h>
+	int main(){
+	fork();
+	int p=getpid();
+	printf("\nProcess id %d\n",p);
+	return 0;
+	}
+
+Output: 
+	Process id 36989
+
+	Process id 36990
+
+03) code:
+	#include<stdio.h>
+	#include<unistd.h>
+	int main(){
+	fork();
+	int p=getpid();
+	printf("\nHello World\n");
+	printf("The process id is %d \n",p);
+	return 0;
+
+output: 
+	Hello World
+	The process id is 38727
+
+	Hello World
+	The process id is 38728
+
+04) code:
+	#include<stdio.h>
+	#include<unistd.h>
+	int main(){
+	printf("Hi\n");
+	fork();
+	printf("Hello world\n");
+	return 0;
+	}
+ 
+output: 
+	Hi
+	Hello world
+	Hello world
+
+05)code: 
+	#include<stdio.h>
+	#include<unistd.h>
+
+	int main(){
+	fork();
+	fork();
+	printf("I am %d my pid is %d ppid id %d\n",getpid(),getpid(),getppid());
+	return 0;
+	}
+
+output: 
+	I am 44412 my pid is 44412 ppid id 32200 (ppid=parent process id)
+	I am 44414 my pid is 44414 ppid id 44412
+	I am 44413 my pid is 44413 ppid id 44412
+	I am 44415 my pid is 44415 ppid id 44413
+

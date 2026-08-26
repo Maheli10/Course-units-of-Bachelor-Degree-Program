@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<unistd.h>
+#include<stdlib.h>
+	int main(){
+		int index=1234;
+		int pipeAB[2];
+		int pipeAC[2];
+		pipe(pipeAB);
+		pipe(pipeAC);
+		
+		if(fork()==0){
+			close(pipeAB[1]);
+			int num;
+			read(pipeAB[0],&num,sizeof(num));
+			close(pipeAB[0]);
+			printf("C(PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	else if(fork()==0){
+	printf("C(PID: %d, PPID: %d)\n",getpid(),getppid());
+	if(a%2==0){
+		printf("%d is even",$a);
+		}
+	else{
+		printf("%d is odd",$b);
+		}
+	if(fork()==0){
+	printf("D(PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	}
+	return 0;
+	}

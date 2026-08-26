@@ -1,0 +1,277 @@
+ vi first.sh - to make a file
+	echo - to enter data
+	escape,:, w ,q ,enter - to save data and go back 
+ bash first.sh - to execute file 
+
+--------inside the file-----
+name='John'
+age=22
+echo "my name is $name and age is $age"
+
+a=10
+b=5
+add=$(($a+$b))
+echo "addition of $a and $b is $add"
+
+echo "Enter 2 numbers: "
+read a
+read b
+add=$(($a+$b))
+echo "addition of $a and $b is $add"
+
+echo "Enter number 1 : "
+read n1
+echo "Enter number 2: "
+read n2
+if [ $n1 -eq $n2 ] then
+echo "the 2 numbers are equal"
+else
+echo "not equal"
+fi
+
+echo "Enter number 1 : "
+read n1
+echo "Enter number 2: "
+read n2
+if [ $n1 -eq $n2 ]; then
+echo " equal"
+elif [ $n1 -gt $n2 ]; then
+echo "$n1 greater than $n2"
+else
+echo "$n1 less than $n2"
+fi
+~
+
+echo "Enter mark 1 : "
+read n1
+echo "Enter mark 2: "
+read n2
+echo "Enter mark 3"
+read n3
+echo "Enter mark 4"
+read n4
+echo "Enter mark 5"
+read n5
+
+total=$(($n1+$n2+$n3+$n4+$n5))
+echo "Total is $total"
+
+avg=$(($total/5))
+echo "average is $avg"
+
+if [ $total -ge 400 ]; then
+echo " very good"
+elif [ $total -ge 300 ]; then
+echo "good"
+elif [ $total -ge 200 ]; then
+echo "normal"
+elif [ $total -ge 100 ]; then
+echo "poor"
+else
+echo "very poor"
+fi
+
+
+
+for num in 1 2 3 4 5
+do
+echo $num
+done
+~
+~
+
+------Day 04---------------------------------------------------------------------------
+
+1.code -:    (concatenation of 2 stringsi)
+	echo "Enter the first string"
+	read string1
+	echo "Enter the 2nd string"
+	read string2
+	result_string="$string1 $string2"
+	echo "$result_string"
+output:-
+	
+	Enter the first string
+	maheli
+	Enter the 2nd string
+	seneja
+	maheli seneja
+
+2.code :-    (to convert lowercase strings to uppercase)
+	uppercase_string= $(echo "$string1" | tr '[:lower:]' '[:upper:]')
+	echo "$uppercase_string"
+
+output :-  MAHELI
+
+
+3.code:-      (to find string length using if)
+	echo "Enter the first string"
+	read string1
+	echo "Enter the 2nd string"
+	read string2
+	if [ ${#string1} -eq ${#string2} ];then
+	echo "Both strings have same length"
+	else
+	echo "Both strings have different lengths"
+	fi
+
+
+4.code :-    (AND operation -&& and IF to a integer)
+	echo "Enter a number"
+	read num
+	if [ "$num" -ge 10 ] && [ "$num" -le 20 ];
+	then
+	echo "$num is between 10 and 20"
+	else
+	echo "$num is not betweeen 10 and 20"
+	fi
+output:-
+	Enter a number
+	17
+	17 is between 10 and 20
+
+5.code:-   (OR operation- ||)
+	echo "Are you an admin (yes/no): "
+	read is_admin
+	echo "Are you a moderator (yes/no): "
+	read is_moderator
+	if [ "$is_admin" == "yes" ] || [ "$is_moderator" == "yes" ];
+	then
+	echo "You have special previledges"
+	else
+	echo "You do not have special previledges"
+	fi
+output:-
+	 bash first.sh
+	Are you an admin (yes/no):
+	yes
+	Are you a moderator (yes/no):
+	yes
+	You have special previledges
+	
+	[2022ict23@fedora ~]$ bash first.sh
+	Are you an admin (yes/no):
+	yes
+	Are you a moderator (yes/no):
+	no
+	You have special previledges
+	
+	[2022ict23@fedora ~]$ bash first.sh
+	Are you an admin (yes/no):
+	no
+	Are you a moderator (yes/no):
+	no
+	You do not have special previledges
+
+
+6.code-: (switch case)
+	echo "Enter a number:  "
+	read a
+	case $a in
+	1)echo "Monday";;
+	2)echo "Tuesday";;
+	3)echo "Wednesday";;
+	4)echo "Thursday";;
+	5)echo "Friday";;
+	6)echo "Saturday";;
+	7)echo "Sunday";;
+	*)echo "Invalid Input";;
+	esac
+	
+output:- 
+	 bash first.sh
+		Enter a number:
+		4
+		Thursday
+	
+	[2022ict23@fedora ~]$ bash first.sh
+		Enter a number:
+		t
+		Invalid Input
+
+7.code :- (Array,print array elements)
+	fruit=("Apple" "Banana" "Orange" "Grape")
+	echo "The first fruit is ${fruit[0]}"
+
+output:-
+	bash first.sh
+		The first fruit is Apple
+
+8.code:- (print all elements in array)
+	fruit=("Apple" "Banana" "Orange" "Grape")
+	echo "List of fruits"
+	for fruit in "${fruit[@]}";
+	do
+	echo "$fruit"
+	done
+	
+output:-
+	$ bash first.sh
+		List of fruits
+		Apple
+		Banana
+		Orange
+		Grape
+
+9.code:- (sum of elemets,sorting elements)
+	numbers=(10 5 40 7 80)
+	sum=0
+	for num in "${numbers[@]}";
+	do
+	((sum +=num))
+	done
+	echo "Sum of numbers is $sum"
+
+	sorted=($(printf '%s\n' "${numbers[@]}" | sort -n))
+	echo "Sorted array: "
+	for num in "${sorted[@]}";
+	do
+	echo $num
+	done
+output:-
+	Sum of numbers is 142
+	Sorted array: 
+	5
+	7
+	10 
+	40
+	80
+	
+10.code:- (While loop )
+	count=0
+	while [ $count -le 5 ];
+	do
+	echo "$count"
+	((count++))
+	done
+
+OUTPUT:-
+	bash first.sh
+	0
+	1
+	2
+	3
+	4
+	5
+
+11.code:-(functions)
+	greet() {
+	echo "Hello, $1!"
+	}
+	greet "Alice"
+output:- 
+	Hello, Alice!
+	Hello, Bob!
+
+
+
+	
+
+
+
+
+
+
+
+
+

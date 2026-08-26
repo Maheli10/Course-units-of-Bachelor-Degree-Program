@@ -1,0 +1,38 @@
+ICA QS
+01)
+	echo "Enter the number"
+	read num
+
+	sum=0;
+	while [ $num -gt 0 ];
+	do
+	digit=$num%10
+	sum=$(($sum+$digit))
+	num=$(($num/10))
+	done
+
+	echo "Sum od digits: $sum"
+	~
+
+02)
+	echo "Enter the player's Name: "
+	read name
+	length=${#name}
+	echo "Length of the player's name : $length"
+	echo "Enter the number of matches played: "
+	read match
+	total=0;
+	avg=1;
+	hscore=0;
+	NofHalfCen=0;
+	while [ $match -gt 0 ];
+	do
+	echo "Enter the runs scored: "
+	read runs
+	total=$(($runs+$total))
+	((match--))
+	done
+
+	echo "Total runs scored: $total"
+	avg=$(($total/$match))
+	echo "Average runs: $avg"

@@ -1,0 +1,41 @@
+write a program to enter 2 numbers and perform adition and 
+substraction operations using the + , - arithmetic operators.
+display results
+
+	echo "num1 and number 2"
+	read num1 
+	read num2
+
+	sum= $(($num1+$num2))
+	sub= $(($num1-$num2))
+
+	echo " result is $sum,$sub"
+	
+write a program to enter a base number and an exponent.calculate modulus
+and exponentiation
+
+	echo "Enter bas and exponet of the number"
+	read num1
+	read num2
+	mod=$(($num1%$num2))
+	expo=$(($num1**$num2))
+	echo "Modulus is $mod and Exponention is $expo"
+
+
+write a program to enter 2 strings and compares their lengths.
+then check which string has long lengths
+
+	echo "Enter the string 1:"
+	read str1
+	echo "Enter the string 2:"
+	read str2
+	if [ ${#str1} -eq ${#str2} ];
+	then
+	echo "both strings have same length"
+	elif [ ${#str1} -gt ${#str2} ];
+	then
+	echo "string 1 is greater than string 2"
+	else
+	echo "string 2 is greater than string 1"
+	fi
+

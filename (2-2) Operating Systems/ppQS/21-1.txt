@@ -1,0 +1,23 @@
+echo "Enter 2 numbers: "
+read a
+read b
+
+echo "Enter the number of operation(+,-,*,/)"
+echo "1)Addition"
+echo "2)substraction"
+echo "3)Multiplication"
+echo "4)Division"
+read op
+
+add=$(($a+$b));
+sub=$(($a-$b));
+mul=$(($a*$b));
+div=$(($a/$b));
+
+case $op in
+1)echo "Addition: $add";;
+2)echo "Substraction: $sub";;
+3)echo "Multiplication: $mul";;
+4)echo "Division: $div";;
+*)echo "Invalid Input";;
+esac

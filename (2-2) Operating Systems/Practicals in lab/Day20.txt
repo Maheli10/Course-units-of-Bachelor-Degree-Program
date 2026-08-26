@@ -1,0 +1,14 @@
+create a simplified version of a process hierarchy and implement inter process com woth pipes
+
+1. A (parent )shall read x from user
+2. Create child process B
+3. B- create 2 grandchildren D,E
+4. Data flow:
+	A send x to B
+	B calculate x^2, send result to D,E
+ 
+Individual process requirements
+1. B recieve x from A,calculate x^2,print  ""
+2. D receive squared value from B,print in hexadecimal
+(use %x for converting)
+3. E receive squared value from B and print: octal(use %o)

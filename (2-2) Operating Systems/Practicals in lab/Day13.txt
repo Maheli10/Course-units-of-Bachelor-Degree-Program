@@ -1,0 +1,93 @@
+code 01:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+
+int main() {
+    // CREATE A PIPE
+    int pipefd[2];
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
+
+    // FORK A CHILD PROCESS
+    pid_t childpid = fork();
+    if (childpid == -1) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+
+    else if (childpid == 0) {
+        // CHILD PROCESS
+
+        // Close write end (not needed)
+        close(pipefd[1]);
+
+        // Read from pipe
+        char buffer[100];
+        ssize_t bytesRead = read(pipefd[0], buffer, sizeof(buffer));
+
+        if (bytesRead == -1) {
+            perror("read");
+            exit(EXIT_FAILURE);
+        }
+
+        printf("Child process received: %.*s\n", (int)bytesRead, buffer);
+
+        // Close read end
+        close(pipefd[0]);
+        exit(EXIT_SUCCESS);
+    }
+
+    else {
+        // PARENT PROCESS
+
+        // Close read end (not needed)
+        close(pipefd[0]);
+
+        // Message to send
+        const char *message = "Hello from parent!";
+
+        // Write to pipe
+        ssize_t bytesWritten = write(pipefd[1], message, strlen(message));
+
+        if (bytesWritten == -1) {
+            perror("write");
+            exit(EXIT_FAILURE);
+        }
+
+        // Close write end
+        close(pipefd[1]);
+
+        // Wait for child to finish
+        wait(NULL);
+    }
+
+    return 0;
+}
+--------------------------------------------------------------------------
+code 02:
+	
+	pid_t childpid = fork();
+	if(childpid == -1){
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	elseif(childpid ==0 ){
+		//child process
+		//...
+		exit(EXIT_SUCCESS);
+	}
+	else{
+		//parent process
+		pid_t terminatedchild= wait(NULL);
+		if(terminatedchild == -1){
+			perror("wait");
+			exit(EXIT_FAILURE);
+		}
+	}
+	

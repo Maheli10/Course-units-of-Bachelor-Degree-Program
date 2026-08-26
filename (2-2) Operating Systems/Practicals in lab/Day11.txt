@@ -1,0 +1,182 @@
+01)code: 
+
+	#include<unistd.h>
+	#include<stdio.h>
+	int main(){
+	int n;
+	printf("Enter the number: ");
+	scanf("%d",&n);
+	int c=fork();
+	if(c==0){
+		printf("%d *2= %d \n",n,n*2);
+	}
+	else{
+	printf("%d / 2 =%d \n",n,n/2);
+	}
+	
+	return 0;
+	}
+
+Output: 
+	Enter the number: 6
+	6 / 2 =3
+	6 *2= 12
+
+02)code:
+
+	#include<unistd.h>
+	#include<stdio.h>
+	int main(){
+		int i=0;
+		pid_t childpid= fork();
+		if(childpid== -1){
+			printf("Failed to fork");
+			return -1 ;
+		}
+		else if(childpid==0){
+			for(i=0; i<5; i++){
+				printf("Child \n");
+			}
+		}
+		else{
+			for(i=0; i<5; i++){
+				printf("Parent \n");
+			}
+		}
+		return 0;
+	}
+	
+Output: Parent
+	Parent
+	Parent
+	Parent
+	Parent
+	Child
+	Child
+	Child
+	Child
+	Child
+
+
+	
+03)code: 
+	#include<stdio.h>
+	#include<unistd.h>
+	int main(){
+	int n1,n2;
+		printf("Enter 2 numbers: ");
+		scanf("%d %d",&n1,&n2);
+		printf("(PID: %d)\n",getpid());
+		
+		int f= fork();
+		if(f==0){
+			printf("Addition: %d \n", n1+n2);
+			printf("(PID: %d, PPID: %d)\n",getpid(),getppid());
+		}
+		
+		if(f==0){
+			printf("Substraction: %d \n", n1-n2);
+			printf("(PID: %d, PPID: %d)\n",getpid(),getppid());
+		}
+		
+		if(f==0){
+			printf("Multiplication: %d \n", n1*n2);
+			printf("(PID: %d, PPID: %d)\n",getpid(),getppid());
+		}
+		
+		if(f==0){
+			printf("Division: %d \n", n1/n2);
+			printf("(PID: %d, PPID: %d)\n",getpid(),getppid());
+		}
+		return 0;
+	}
+
+output: 
+	Enter 2 numbers: 10
+	5
+	(PID: 17147)
+	Addition: 15
+	(PID: 17186, PPID: 1)
+	Substraction: 5
+	(PID: 17186, PPID: 1)
+	Multiplication: 50
+	(PID: 17186, PPID: 1)
+	Division: 2
+	(PID: 17186, PPID: 1)
+
+04)code: 
+#include<stdio.h>
+#include<unistd.h>
+#include<sys/msg.h>
+#include<string.h>
+#include<stdlib.h>
+
+#define MSGKEY 1111
+
+struct person {
+    long mtype;   // message type (required)
+    int age;
+    char name[100];
+    char regno[100];
+};
+
+int main() {
+
+    int msgid;
+    struct person p1, p2;
+
+    int f = fork();
+
+    if(f == 0) {
+
+        // Child Process (Receiver)
+
+        msgid = msgget(MSGKEY, IPC_CREAT | 0666);
+
+        msgrcv(msgid, &p2, sizeof(p2) - sizeof(long), 1, 0);
+
+        printf("\n--- Data Received ---\n");
+        printf("Name   : %s\n", p2.name);
+        printf("Reg No : %s\n", p2.regno);
+        printf("Age    : %d\n", p2.age);
+
+        // Delete message queue
+        msgctl(msgid, IPC_RMID, NULL);
+    }
+    else {
+
+        // Parent Process (Sender)
+
+        msgid = msgget(MSGKEY, IPC_CREAT | 0666);
+
+        p1.mtype = 1;
+
+        printf("Enter name: ");
+        scanf("%s", p1.name);
+
+        printf("Enter regno: ");
+        scanf("%s", p1.regno);
+
+        printf("Enter age: ");
+        scanf("%d", &p1.age);
+
+        if(msgsnd(msgid, &p1, sizeof(p1) - sizeof(long), 0) < 0) {
+            printf("Message not sent\n");
+        }
+        else {
+            printf("\nMessage sent successfully\n");
+        }
+    }
+
+    return 0;
+}
+	
+Output: 
+
+	Enter name:Maheli
+	Enter regno:2022ict1111111111111
+	Enter age:22
+	Message send
+	[2022ict23@fedora ~]$ Received name: Kajane
+	Received regno: 2022ict108
+

@@ -1,0 +1,22 @@
+01. Create a menu- driven shell script thaat
+ allows the user to choose between various 
+ operations such as addition,substraction,
+ multiplication and division.
+the shell script should take two numbers as 
+input and perform the selected operation.
+
+	echo "Enter 2 numbers: "
+        read a
+        read b
+        echo "Select operation:(enter the number of operation) "
+        echo "1-Addition,2-Substraction, 3-Multiplication, 4-Division"
+        read op
+
+        case $op in
+        1)echo "Addition: $(($a+$b))";;
+        2)echo "Substraction: $(($a-$b))";;
+        3)echo "Multiplication: $(($a*$b))";;
+        4)echo "Division: $(($a/$b))";;
+        *)echo "Invalid Input";;
+        esac
+i

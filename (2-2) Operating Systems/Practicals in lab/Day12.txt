@@ -1,0 +1,121 @@
+01) code:
+	#include<sys/types.h>
+	#incllude<sys/ipc.h>
+	#include<sys/msg.h>
+	#include<unistd.h>
+	int main(){
+		int msqid;
+		key_t key=15;
+		
+		msqid=msgget(key,IPC_CREAT | 6000);
+		if(msqid<0){
+			printf("msgget failed.");
+		}
+		else{
+			printf("message que created successfully with key %d \n",msqid);
+		}
+	}
+	
+Output:
+	
+02)code: 
+	#include<sys/types.h>
+	#incllude<sys/ipc.h>
+	#include<sys/msg.h>
+	#include<unistd.h>
+	#include<string,h>
+	#define MSGKEY 1111
+	int main(){
+		int msqid;
+		
+		msqid=msgget(MSGKEY,IPC_CREAT |0666);
+		
+		msgrcv(msqid,&mtext,1024,0,0);
+		printf("Recieved String: %s \n, mtext");
+		msgctl(mmsqid,IPC_RMID,0);
+		return 0;
+	}
+	
+03) code: 
+	#include<stdio.h>
+#include<sys/types.h>
+#include<sys/ipc.h>
+#include<sys/msg.h>
+#include<unistd.h>
+#include<string.h>
+#include<stdlib.h>
+
+#define MSGKEY 1111
+#define MAXSIZE 128
+
+struct person{
+    int age;
+    char name[100];
+    char regno[100];
+};
+
+int main(){
+
+    int msqid;
+
+    struct person p1;
+
+    p1.age = 25;
+
+    msqid = msgget(MSGKEY, IPC_CREAT | 0666);
+
+    printf("Enter a name: ");
+    scanf("%s", p1.name);
+
+    printf("Enter regno: ");
+    scanf("%s", p1.regno);
+
+    printf("Enter age: ");
+    scanf("%d", &p1.age);
+
+    int buflen = sizeof(p1);
+
+    if(msgsnd(msqid, &p1, buflen, IPC_NOWAIT) < 0){
+        printf("Message not sent\n");
+    }
+    else{
+        printf("Message sent\n");
+        exit(0);
+    }
+
+    return 0;
+}
+
+04)code: (modify thin code as ....)
+	#include<sys/types.h>
+	#incllude<sys/ipc.h>
+	#include<sys/msg.h>
+	#include<unistd.h>
+	#include<string,h>
+	#define MSGKEY 1111
+	#define MAXSIZE 128
+	int main(){
+	
+	
+		int msqid;
+		char name[100];
+		char regno[100];
+		
+		
+		struct person p1;
+		p1.age=25;
+		msgqid= msgget(MSGKEY,IPC_CREAT |0666);
+		printf("Enter a name:");
+		scanf("%s", &p1.age);
+		printf("Enter age:");
+			scanf("%s",&p1.age);
+			
+			int buflen= sizeof(p1)+1;
+			if(msgsnd(msgpid,&p1,buflen,IPC_NOWAIT)<0){
+			printf("Message not send \n");
+			}
+			else{
+				printf("Message send \n");
+				exit(0);
+			}
+	}

@@ -1,0 +1,60 @@
+echo "Enter 4 digit number: "
+read num
+num2=$num
+sum(){
+	i=0
+	while [ $i -lt 4 ];
+	do
+	n=$(($num%10))
+	sum=$(($sum+$n))
+	num=$(($num/10))
+	((i++))
+	done
+	echo "digit sum: $sum"
+}
+reverse(){
+	echo "Reverse order:"
+	i=0
+	while [ $i -lt 4 ];
+	do
+	n=$(($num2%10))
+	echo $n
+	num2=$(($num2/10))
+	((i++))
+	done
+	
+}
+sum
+reverse 
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+	#include<stdio.h>
+	#include<unistd.h>
+	int main(){
+	printf(" Temperature :");
+	int temp;
+	scanf("%d \n",&temp);
+	printf("A (PID: %d) \n",getpid());
+	
+	if(fork()==0){
+	int C=temp;
+	int F= 9/5*C+32;
+	printf(" Temperature in Farenhite: %d \n",F);
+	printf("Child1: (PID: %d, PPID: %d)\n",getpid(),getppid());
+	
+	if(fork()==0){
+	int F=temp;
+	int C=(F -32)*5/9;
+	printf(" Temperature in Celcius: %d \n",C);
+	printf("Child2: (PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	}
+	else if(fork()==0){
+	int K=temp;
+	int C=K-273.15;
+	printf(" Temperature in Kelvin: %d \n",C);
+	printf("Child3: (PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	return 0;
+	}

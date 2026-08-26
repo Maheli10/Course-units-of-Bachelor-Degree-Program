@@ -1,0 +1,69 @@
+2026/03/12
+ -----------------------------------------------------------------------------------
+01)code:
+	#include<stdio.h>
+	#include<unistd.h>
+
+	int main(){
+	int child_pid;
+	child_pid=fork();
+	if (child_pid== 0){
+	printf("Child process \n");
+	}
+	else if(child_pid>0){
+	printf("Parent process \n");
+	}
+	else{
+	perror("fork failed");
+	}
+	return 1;
+	}
+
+ouyput:
+	Parent process
+	Child process
+
+02)code: --------Linear child process-----------------------
+
+	#include<unistd.h>
+	#include<stdio.h>
+
+	int main(){
+	printf("A (PID %d)\n",getpid());
+	if(fork() ==0)
+	{
+	printf("B (PID: %d, parent PID: %d)\n",getpid(),getppid());
+
+	if(fork()==0){
+	printf("c (PID: % d,parent PID:%d)\n",getpid(),getppid());
+	}
+	}
+	return 0;
+	}
+	
+Output: 
+	A (PID 15942)
+	B (PID: 15943, parent PID: 15942)
+	c (PID:  15944,parent PID:15943)
+
+03)code: 
+	#include<unistd.h>
+	#include<stdio.h>
+
+	int main(){
+	printf("A (PID: %d)\n",getpid());
+	if (fork()==0){
+	printf("B (PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	else if( fork()==0){
+	printf("c (PID: %d, PPID: %d)\n",getpid(),getppid());
+	}
+	return 0;
+	}
+	
+output: 
+A (PID: 11294)
+B (PID: 11295, PPID: 11294)
+c (PID: 11296, PPID: 11294)
+
+
